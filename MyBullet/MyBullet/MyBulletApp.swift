@@ -18,7 +18,7 @@ struct MyBulletApp: App {
 
     var body: some Scene {
         WindowGroup {
-          SignIn()
+          SignInView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
