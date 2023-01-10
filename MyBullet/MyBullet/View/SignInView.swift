@@ -9,8 +9,14 @@ import SwiftUI
 
 struct SignInView: View {
     // MARK: User Details
-    @State var emailID: String = ""
-    @State var password: String = ""
+    @State private var emailID: String = ""
+    @State private var password: String = ""
+    
+    // MARK: View Properties
+    @State private var createAccount: Bool = false
+    private var activeButton: Bool {
+        emailID.isEmpty || password.isEmpty
+    }
     
     var body: some View {
         VStack(spacing: 10) {
@@ -26,7 +32,6 @@ struct SignInView: View {
                 .fontWeight(.semibold)
                 .lineSpacing(10)
                 .padding(.top, 5)
-                .padding(.trailing, 15)
             }
             .hAlign(.leading)
             
@@ -65,19 +70,21 @@ struct SignInView: View {
                 Text("로그인")
                     .foregroundColor(.white)
                     .font(.title3)
+                    .bold()
                     .hAlign(.center)
                     .padding(.vertical, 10)
             }
             .buttonStyle(.borderedProminent)
             .tint(.accentColor)
+            .disabled(activeButton)
             
             Spacer()
             HStack {
-                Text("아직 계정이 없으세요?")
+                Text("아직 회원이 아니세요?")
                     .foregroundColor(.gray)
                 
                 Button {
-                    
+                    createAccount.toggle()
                 } label: {
                     Text("회원가입")
                         .fontWeight(.semibold)
@@ -86,6 +93,10 @@ struct SignInView: View {
             }
         }
         .padding(30)
+        // MARK: 회원가입 뷰 via Sheet
+        .fullScreenCover(isPresented: $createAccount) {
+            SignUpView()
+        }
     }
 }
 
