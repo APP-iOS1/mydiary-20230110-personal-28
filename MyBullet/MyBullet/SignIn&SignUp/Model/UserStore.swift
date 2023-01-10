@@ -102,4 +102,44 @@ class AuthStore {
         
         return signOutResponse
     }
+    
+    // MARK: Change displayName
+    func changeDisplayName(nickname: String) async {
+        guard let currentUser = auth.currentUser else { return }
+        
+        let changeRequest = currentUser.createProfileChangeRequest()
+        changeRequest.displayName = nickname
+        
+        do {
+            try await changeRequest.commitChanges()
+        } catch {
+            let errorCode = AuthErrorCode.Code(rawValue: error._code)
+            switch errorCode {
+            case .networkError:
+                print(AuthError.networkError.description)
+            default:
+                print(AuthError.unknown.description)
+            }
+        }
+    }
+    
+    // MARK: Change Profile Photo
+    func changeProfilePhoto(photoURL: String) async {
+        guard let currentUser = auth.currentUser else { return }
+        
+        let changeRequest = currentUser.createProfileChangeRequest()
+        changeRequest.photoURL = URL(string: photoURL)
+        
+        do {
+            try await changeRequest.commitChanges()
+        } catch {
+            let errorCode = AuthErrorCode.Code(rawValue: error._code)
+            switch errorCode {
+            case .networkError:
+                print(AuthError.networkError.description)
+            default:
+                print(AuthError.unknown.description)
+            }
+        }
+    }
 }
