@@ -31,6 +31,7 @@
 		63BDF6C5296CF2C7008B4147 /* MyBullet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyBullet.xcdatamodel; sourceTree = "<group>"; };
 		63BDF6CC296CF346008B4147 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		63BDF6D7296CF8D8008B4147 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63BDF6D9296CFC0E008B4147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,12 +69,13 @@
 		63BDF6B8296CF2C6008B4147 /* MyBullet */ = {
 			isa = PBXGroup;
 			children = (
+				63BDF6DA296CFD35008B4147 /* View */,
 				63BDF6B9296CF2C6008B4147 /* MyBulletApp.swift */,
-				63BDF6CC296CF346008B4147 /* SignIn.swift */,
 				63BDF6BB296CF2C6008B4147 /* Keeping.swift */,
 				63BDF6BD296CF2C7008B4147 /* Assets.xcassets */,
 				63BDF6C2296CF2C7008B4147 /* Persistence.swift */,
 				63BDF6C4296CF2C7008B4147 /* MyBullet.xcdatamodeld */,
+				63BDF6D9296CFC0E008B4147 /* Info.plist */,
 				63BDF6BF296CF2C7008B4147 /* Preview Content */,
 			);
 			path = MyBullet;
@@ -85,6 +87,14 @@
 				63BDF6C0296CF2C7008B4147 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		63BDF6DA296CFD35008B4147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63BDF6CC296CF346008B4147 /* SignIn.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,8 +310,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyBullet/Preview Content\"";
+				DEVELOPMENT_TEAM = 39J2PNZP7V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBullet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -328,8 +340,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyBullet/Preview Content\"";
+				DEVELOPMENT_TEAM = 39J2PNZP7V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBullet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
