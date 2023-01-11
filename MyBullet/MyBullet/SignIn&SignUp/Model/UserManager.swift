@@ -39,5 +39,10 @@ class SignInViewModel: ObservableObject {
         self.authResponse = result
     }
     
-    
+    @MainActor
+    func signOut() async {
+        let result: AuthResponse = await authStore.signOut()
+        
+        self.authResponse = result
+    }
 }
