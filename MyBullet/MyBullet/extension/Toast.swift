@@ -19,34 +19,14 @@ struct ToastView: View {
                 Text(LocalizedStringKey(toastData.title))
                     .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.red)
                 Text(LocalizedStringKey(toastData.message))
                     .font(.callout)
                     .opacity(0.9)
             }
             Spacer()
         }
+        .foregroundColor(Color.white)
         .padding(10)
-    }
-}
-
-struct FabulaToastView: View {
-    @State private var showToast = false
-    
-    var body: some View {
-        VStack {
-            Text("Show Toast!")
-                .onTapGesture {
-                    withAnimation {
-                        showToast = true
-                    }
-                }
-        }
-        .showToast(showToast: $showToast.animation(), content: FabulaToast(showToast: $showToast.animation(), toastData: FabulaToast.ToastData(title: "Title", message: "your message", backgroundColor: Color.orange), position: .top))
-        
-#if os(macOS)
-        .frame(width: 500, height: 500)
-#endif
     }
 }
 
@@ -73,12 +53,12 @@ struct FabulaToast: View {
             }
             if #available(macOS 12.0, *) {
                 ToastView(toastData: toastData)
-                    .background(toastData.backgroundColor.opacity(0.3))
+                    .background(toastData.backgroundColor.opacity(0.6))
                     .background(.ultraThinMaterial)
                     .cornerRadius(10)
             } else {
                 ToastView(toastData: toastData)
-                    .background(toastData.backgroundColor.opacity(0.8))
+                    .background(toastData.backgroundColor.opacity(0.6))
                     .cornerRadius(10)
             }
             

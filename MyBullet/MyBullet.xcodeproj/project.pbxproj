@@ -22,6 +22,7 @@
 		6374B8DA296E44D200EA4242 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8D9296E44D200EA4242 /* ResetPasswordViewModel.swift */; };
 		6374B8DC296E451A00EA4242 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8DB296E451A00EA4242 /* ResetPasswordResponse.swift */; };
 		6374B8DE296E4B0000EA4242 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8DD296E4B0000EA4242 /* Toast.swift */; };
+		6374B8E0296E57D600EA4242 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8DF296E57D600EA4242 /* LoadingView.swift */; };
 		63BDF6BA296CF2C6008B4147 /* MyBulletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BDF6B9296CF2C6008B4147 /* MyBulletApp.swift */; };
 		63BDF6BC296CF2C6008B4147 /* Keeping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BDF6BB296CF2C6008B4147 /* Keeping.swift */; };
 		63BDF6BE296CF2C7008B4147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BDF6BD296CF2C7008B4147 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		6374B8D9296E44D200EA4242 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		6374B8DB296E451A00EA4242 /* ResetPasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordResponse.swift; sourceTree = "<group>"; };
 		6374B8DD296E4B0000EA4242 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		6374B8DF296E57D600EA4242 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		63BDF6B6296CF2C6008B4147 /* MyBullet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBullet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BDF6B9296CF2C6008B4147 /* MyBulletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletApp.swift; sourceTree = "<group>"; };
 		63BDF6BB296CF2C6008B4147 /* Keeping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keeping.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				6374B8AE296D093500EA4242 /* AllignExtension.swift */,
 				6374B8DD296E4B0000EA4242 /* Toast.swift */,
+				6374B8DF296E57D600EA4242 /* LoadingView.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				6374B8D6296E37EA00EA4242 /* SignUpViewModel.swift in Sources */,
 				6374B8AF296D093500EA4242 /* AllignExtension.swift in Sources */,
 				6374B8B1296D239900EA4242 /* SignUpView.swift in Sources */,
+				6374B8E0296E57D600EA4242 /* LoadingView.swift in Sources */,
 				6374B8B6296D3B1900EA4242 /* isValidEmail.swift in Sources */,
 				6374B8C4296DC78600EA4242 /* AuthResponse.swift in Sources */,
 				6374B8CC296DDB5B00EA4242 /* DuplicatedResponse.swift in Sources */,

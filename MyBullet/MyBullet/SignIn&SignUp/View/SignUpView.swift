@@ -21,6 +21,10 @@ struct SignUpView: View {
     
     // MARK: View Properties
     @Environment(\.dismiss) var dismiss
+    @State private var showSuccessToast: Bool = false
+    @State private var showFailToast: Bool = false
+    @State private var toastMessage: String = ""
+    @State private var isLoading: Bool = false
     
     private var validEmail: Bool {
         !isValidEmail(emailID)
@@ -71,8 +75,16 @@ struct SignUpView: View {
                             .textInputAutocapitalization(.never)
                             .disableAutocorrection(true)
                         Button {
+                            isLoading = true
                             Task {
                                 await signUpVM.checkDuplicateEmail(emailID: emailID)
+                                toastMessage = signUpVM.duplicatedResponse.message
+                                if signUpVM.duplicatedResponse.isSuccessed && !signUpVM.duplicatedResponse.isDuplicated {
+                                    showSuccessToast.toggle()
+                                } else {
+                                    showFailToast.toggle()
+                                }
+                                isLoading = false
                             }
                         } label: {
                             Text("중복확인")
@@ -161,9 +173,14 @@ struct SignUpView: View {
             }
             
             Button {
+                isLoading = true
                 Task {
-                    dismiss()
                     await signInVM.signUpAndSetNickname(emailID: emailID, password: password, nickname: displayName)
+                    toastMessage = signInVM.authResponse.message
+                    if !signInVM.authResponse.isSuccessed {
+                        showFailToast.toggle()
+                    }
+                    isLoading = false
                 }
             } label: {
                 Text("회원가입")
@@ -192,6 +209,19 @@ struct SignUpView: View {
             }
         }
         .padding(.horizontal, 30)
+        .overlay {
+            LoadingView(showLoading: $isLoading)
+        }
+        .showToast(showToast: $showSuccessToast, content:
+            FabulaToast(showToast: $showSuccessToast,
+                        toastData: FabulaToast.ToastData(title: "확인!", message: toastMessage, backgroundColor: Color.green),
+                        position: .top)
+        )
+        .showToast(showToast: $showFailToast, content:
+            FabulaToast(showToast: $showFailToast,
+                        toastData: FabulaToast.ToastData(title: "에러!", message: toastMessage, backgroundColor: Color.red),
+                        position: .top)
+        )
     }
 }
 
