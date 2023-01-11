@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SignUpView: View {
+    
+    @EnvironmentObject var signInVM: SignInViewModel
+    var signUpVM: SignUpViewModel = SignUpViewModel()
+    
     // MARK: User Details
     @State private var emailID: String = ""
     @State private var displayName: String = ""
@@ -17,6 +21,7 @@ struct SignUpView: View {
     
     // MARK: View Properties
     @Environment(\.dismiss) var dismiss
+    
     private var validEmail: Bool {
         !isValidEmail(emailID)
     }
@@ -30,7 +35,7 @@ struct SignUpView: View {
         passwordCheck == password
     }
     private var activeButton: Bool {
-        validEmail && validDisplayName && validPassword && validCheck && termsAgree
+        !validEmail && validDisplayName && validPassword && validCheck && termsAgree
     }
     
     var body: some View {
@@ -58,11 +63,23 @@ struct SignUpView: View {
                                 .font(.callout)
                         }
                     }
-                    TextField("이메일 아이디", text: $emailID)
-                        .keyboardType(.emailAddress)
-                        .textContentType(.emailAddress)
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
+                    
+                    HStack {
+                        TextField("이메일 아이디", text: $emailID)
+                            .keyboardType(.emailAddress)
+                            .textContentType(.emailAddress)
+                            .textInputAutocapitalization(.never)
+                            .disableAutocorrection(true)
+                        Button {
+                            Task {
+                                await signUpVM.checkDuplicateEmail(emailID: emailID)
+                            }
+                        } label: {
+                            Text("중복확인")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(validEmail)
+                    }
                     Rectangle()
                       .frame(height: 1)
                       .foregroundColor(.gray)
@@ -138,14 +155,16 @@ struct SignUpView: View {
                 NavigationLink {
                     TermsOfUseView()
                 } label: {
-                    Text("이용약관")
+                    Text("약관보기")
                         .foregroundColor(.gray)
                 }
-
             }
             
             Button {
-                
+                Task {
+                    dismiss()
+                    await signInVM.signUpAndSetNickname(emailID: emailID, password: password, nickname: displayName)
+                }
             } label: {
                 Text("회원가입")
                     .foregroundColor(.white)

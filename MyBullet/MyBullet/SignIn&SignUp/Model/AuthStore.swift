@@ -83,6 +83,28 @@ class AuthStore {
         return signInResponse
     }
     
+    // MARK: Reset password
+    func resetPassword(emailID: String) async -> ResetPasswordResponse {
+        var resetResponse: ResetPasswordResponse = ResetPasswordResponse()
+        
+        do {
+            try await auth.sendPasswordReset(withEmail: emailID)
+            resetResponse = ResetPasswordResponse(isSuccessed: true, message: "비밀번호 확인 메일이 발송되었습니다.")
+        } catch {
+            let errorCode = AuthErrorCode.Code(rawValue: error._code)
+            switch errorCode {
+            case .networkError:
+                resetResponse = ResetPasswordResponse(isSuccessed: false, message:  AuthError.networkError.description)
+            case .userNotFound:
+                resetResponse = ResetPasswordResponse(isSuccessed: false, message:  AuthError.userNotFound.description)
+            default:
+                resetResponse = ResetPasswordResponse(isSuccessed: false, message:  AuthError.unknown.description)
+            }
+        }
+        
+        return resetResponse
+    }
+    
     // MARK: Sign Out Method
     func signOut() async -> AuthResponse {
         var signOutResponse: AuthResponse = AuthResponse()
