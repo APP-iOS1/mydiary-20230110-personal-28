@@ -12,13 +12,16 @@ import FirebaseCore
 struct MyBulletApp: App {
     let persistenceController = PersistenceController.shared
     
+    @StateObject var signInVM = SignInViewModel()
+    
     init() {
         FirebaseApp.configure()
     }
 
     var body: some Scene {
         WindowGroup {
-          SignInView()
+          ContentView()
+                .environmentObject(signInVM)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

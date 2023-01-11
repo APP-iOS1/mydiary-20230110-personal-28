@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct SignInView: View {
+    
+    @EnvironmentObject var signInVM: SignInViewModel
+    
     // MARK: User Details
     @State private var emailID: String = ""
     @State private var password: String = ""
     
     // MARK: View Properties
     @State private var createAccount: Bool = false
+    @State private var resetPassword: Bool = false
+    
     private var activeButton: Bool {
         emailID.isEmpty || password.isEmpty
     }
@@ -58,14 +63,17 @@ struct SignInView: View {
             .padding(.top, 15)
             .frame(height: 180)
             
-            Button("비밀번호를 잊어버리셨나요?", action: {})
+            // TODO: 비밀번호 재설정 뷰 필요
+            Button("비밀번호를 잊어버리셨나요?", action: { resetPassword.toggle() })
                 .fontWeight(.medium)
                 .tint(.black)
                 .hAlign(.trailing)
                 .padding(.vertical, 7)
             
             Button {
-                
+                Task {
+                    await signInVM.signIn(emailID: emailID, password: password)
+                }
             } label: {
                 Text("로그인")
                     .foregroundColor(.white)
@@ -96,6 +104,9 @@ struct SignInView: View {
         // MARK: 회원가입 뷰 via Sheet
         .fullScreenCover(isPresented: $createAccount) {
             SignUpView()
+        }
+        .fullScreenCover(isPresented: $resetPassword) {
+            ResetPasswordView()
         }
     }
 }
