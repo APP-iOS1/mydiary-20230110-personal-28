@@ -9,18 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var signInVM: SignInViewModel
+    @EnvironmentObject var authManager: AuthManager
     
     var body: some View {
-        if signInVM.currentUser != nil {
-            VStack {
-                Text("로그인 완료")
-                Button("로그아웃") {
-                    Task {
-                        await signInVM.signOut()
-                    }
-                }
-            }
+        if authManager.currentUser != nil {
+            MainView()
         } else {
             SignInView()
         }

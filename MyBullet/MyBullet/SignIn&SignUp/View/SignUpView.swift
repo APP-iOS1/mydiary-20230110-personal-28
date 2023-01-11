@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     
-    @EnvironmentObject var signInVM: SignInViewModel
+    @EnvironmentObject var authManager: AuthManager
     var signUpVM: SignUpViewModel = SignUpViewModel()
     
     // MARK: User Details
@@ -175,9 +175,9 @@ struct SignUpView: View {
             Button {
                 isLoading = true
                 Task {
-                    await signInVM.signUpAndSetNickname(emailID: emailID, password: password, nickname: displayName)
-                    toastMessage = signInVM.authResponse.message
-                    if !signInVM.authResponse.isSuccessed {
+                    await authManager.signUpAndSetNickname(emailID: emailID, password: password, nickname: displayName)
+                    toastMessage = authManager.authResponse.message
+                    if !authManager.authResponse.isSuccessed {
                         showFailToast.toggle()
                     }
                     isLoading = false
