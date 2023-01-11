@@ -15,7 +15,7 @@
 		6374B8CA296DD30000EA4242 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8C9296DD30000EA4242 /* AuthError.swift */; };
 		6374B8CC296DDB5B00EA4242 /* DuplicatedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8CB296DDB5B00EA4242 /* DuplicatedResponse.swift */; };
 		6374B8CE296DE2D400EA4242 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8CD296DE2D400EA4242 /* AuthStore.swift */; };
-		6374B8D0296DE99D00EA4242 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8CF296DE99D00EA4242 /* SignInViewModel.swift */; };
+		6374B8D0296DE99D00EA4242 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8CF296DE99D00EA4242 /* UserManager.swift */; };
 		6374B8D2296DEF1500EA4242 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8D1296DEF1500EA4242 /* ContentView.swift */; };
 		6374B8D6296E37EA00EA4242 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8D5296E37EA00EA4242 /* SignUpViewModel.swift */; };
 		6374B8D8296E41BA00EA4242 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6374B8D7296E41B900EA4242 /* ResetPasswordView.swift */; };
@@ -46,7 +46,7 @@
 		6374B8C9296DD30000EA4242 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthError.swift; path = ../../../../../../AuthError.swift; sourceTree = "<group>"; };
 		6374B8CB296DDB5B00EA4242 /* DuplicatedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatedResponse.swift; sourceTree = "<group>"; };
 		6374B8CD296DE2D400EA4242 /* AuthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
-		6374B8CF296DE99D00EA4242 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		6374B8CF296DE99D00EA4242 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		6374B8D1296DEF1500EA4242 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6374B8D5296E37EA00EA4242 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		6374B8D7296E41B900EA4242 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -116,6 +116,7 @@
 				6374B8CB296DDB5B00EA4242 /* DuplicatedResponse.swift */,
 				6374B8DB296E451A00EA4242 /* ResetPasswordResponse.swift */,
 				6374B8CD296DE2D400EA4242 /* AuthStore.swift */,
+				6374B8CF296DE99D00EA4242 /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				63BDF6CC296CF346008B4147 /* SignInView.swift */,
-				6374B8CF296DE99D00EA4242 /* SignInViewModel.swift */,
 				6374B8B0296D239900EA4242 /* SignUpView.swift */,
 				6374B8D5296E37EA00EA4242 /* SignUpViewModel.swift */,
 				6374B8D7296E41B900EA4242 /* ResetPasswordView.swift */,
@@ -267,7 +267,7 @@
 				6374B8C4296DC78600EA4242 /* AuthResponse.swift in Sources */,
 				6374B8CC296DDB5B00EA4242 /* DuplicatedResponse.swift in Sources */,
 				6374B8CE296DE2D400EA4242 /* AuthStore.swift in Sources */,
-				6374B8D0296DE99D00EA4242 /* SignInViewModel.swift in Sources */,
+				6374B8D0296DE99D00EA4242 /* UserManager.swift in Sources */,
 				6374B8CA296DD30000EA4242 /* AuthError.swift in Sources */,
 				6374B8DA296E44D200EA4242 /* ResetPasswordViewModel.swift in Sources */,
 				6374B8DC296E451A00EA4242 /* ResetPasswordResponse.swift in Sources */,

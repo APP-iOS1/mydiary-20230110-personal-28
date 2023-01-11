@@ -12,8 +12,15 @@ struct ContentView: View {
     @EnvironmentObject var signInVM: SignInViewModel
     
     var body: some View {
-        if signInVM.authResponse.currentUser != nil {
-            Text("로그인 완료")
+        if signInVM.currentUser != nil {
+            VStack {
+                Text("로그인 완료")
+                Button("로그아웃") {
+                    Task {
+                        await signInVM.signOut()
+                    }
+                }
+            }
         } else {
             SignInView()
         }
