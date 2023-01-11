@@ -19,13 +19,13 @@ struct ToastView: View {
                 Text(LocalizedStringKey(toastData.title))
                     .font(.subheadline)
                     .fontWeight(.bold)
+                    .foregroundColor(Color.red)
                 Text(LocalizedStringKey(toastData.message))
                     .font(.callout)
                     .opacity(0.9)
             }
             Spacer()
         }
-        .foregroundColor(Color.accentColor)
         .padding(10)
     }
 }
@@ -90,7 +90,7 @@ struct FabulaToast: View {
         .opacity(self.showToast ? 1.0 : 0)
         .transition(.move(edge: position == .top ? .top : .bottom))
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                 withAnimation {
                     self.showToast = false
                 }
@@ -104,7 +104,6 @@ struct FabulaToast: View {
     }
 }
 
-fileprivate
 struct ToastModifier<T: View>: ViewModifier {
     
     @Binding var showToast: Bool
@@ -124,7 +123,6 @@ struct ToastModifier<T: View>: ViewModifier {
     }
 }
 
-fileprivate
 extension View {
     func showToast<T: View>(showToast: Binding<Bool>, content: T) -> some View {
         self.modifier(ToastModifier(showToast: showToast, content: content))

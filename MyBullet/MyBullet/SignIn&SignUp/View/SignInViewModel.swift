@@ -19,7 +19,7 @@ class SignInViewModel: ObservableObject {
         authResponse.currentUser = Auth.auth().currentUser
     }
     
-    let authStore = AuthStore()
+    private let authStore = AuthStore()
     
     @MainActor
     func signUpAndSetNickname(emailID: String, password: String, nickname: String) async {
@@ -30,9 +30,12 @@ class SignInViewModel: ObservableObject {
         self.authResponse = result
     }
     
+    @MainActor
     func signIn(emailID: String, password: String) async {
         let result: AuthResponse = await authStore.signIn(emailID: emailID, password: password)
         
         self.authResponse = result
     }
+    
+    
 }

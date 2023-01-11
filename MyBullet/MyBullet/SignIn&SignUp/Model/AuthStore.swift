@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 class AuthStore {
-    let auth = Auth.auth()
+    private let auth = Auth.auth()
     
     // MARK: Sign Up Method
     func signUp(emailID: String, password: String) async -> AuthResponse {
@@ -73,6 +73,8 @@ class AuthStore {
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.weakPassword.description)
             case .wrongPassword:
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.wrongPassword.description)
+            case .invalidEmail:
+                signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.invalidEmail.description)
             case .userNotFound:
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.userNotFound.description)
             default:

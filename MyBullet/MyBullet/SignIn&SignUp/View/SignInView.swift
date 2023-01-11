@@ -18,6 +18,8 @@ struct SignInView: View {
     // MARK: View Properties
     @State private var createAccount: Bool = false
     @State private var resetPassword: Bool = false
+    @State private var showToast: Bool = false
+    @State private var toastMessage: String = ""
     
     private var activeButton: Bool {
         emailID.isEmpty || password.isEmpty
@@ -73,6 +75,10 @@ struct SignInView: View {
             Button {
                 Task {
                     await signInVM.signIn(emailID: emailID, password: password)
+                    if !signInVM.authResponse.isSuccessed {
+                        toastMessage = signInVM.authResponse.message
+                        showToast.toggle()
+                    }
                 }
             } label: {
                 Text("로그인")
@@ -108,6 +114,11 @@ struct SignInView: View {
         .fullScreenCover(isPresented: $resetPassword) {
             ResetPasswordView()
         }
+        .showToast(showToast: $showToast, content:
+            FabulaToast(showToast: $showToast,
+                        toastData: FabulaToast.ToastData(title: "에러!", message: toastMessage, backgroundColor: Color.gray),
+                        position: .top)
+        )
     }
 }
 
