@@ -13,14 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         if signInVM.authResponse.currentUser != nil {
-            VStack {
-                Text(signInVM.authResponse.currentUser?.displayName ?? "닉네임없음")
-                Button("로그아웃") {
-                    Task {
-                        await signInVM.authStore.signOut()
-                    }
-                }
-            }
+            Text("로그인 완료")
         } else {
             SignInView()
         }

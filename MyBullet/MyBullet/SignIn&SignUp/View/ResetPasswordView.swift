@@ -15,6 +15,10 @@ struct ResetPasswordView: View {
     
     // MARK: View Properties
     @Environment(\.dismiss) var dismiss
+    @State private var showSuccessToast: Bool = false
+    @State private var showFailToast: Bool = false
+    @State private var toastMessage: String = ""
+    @State private var isLoading: Bool = false
     
     private var validEmail: Bool {
         !isValidEmail(emailID)
@@ -59,8 +63,16 @@ struct ResetPasswordView: View {
             .padding(.top, 15)
             
             Button {
+                isLoading = true
                 Task {
                     await resetPWVM.resetPassword(emailID: emailID)
+                    toastMessage = resetPWVM.resetPasswordResponse.message
+                    if resetPWVM.resetPasswordResponse.isSuccessed {
+                        showSuccessToast.toggle()
+                    } else {
+                        showFailToast.toggle()
+                    }
+                    isLoading = false
                 }
             } label: {
                 Text("메일 보내기")

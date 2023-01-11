@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 class AuthStore {
-    let auth = Auth.auth()
+    private let auth = Auth.auth()
     
     // MARK: Sign Up Method
     func signUp(emailID: String, password: String) async -> AuthResponse {
@@ -17,7 +17,7 @@ class AuthStore {
         
         do {
             let result = try await auth.createUser(withEmail: emailID, password: password)
-            signUpResponse = AuthResponse(isSuccessed: true, message: "SignUp Successed", currentUser: result.user)
+            signUpResponse = AuthResponse(isSuccessed: true, message: "회원가입이 완료되었습니다.", currentUser: result.user)
         } catch {
             let errorCode = AuthErrorCode.Code(rawValue: error._code)
             switch errorCode {
@@ -63,7 +63,7 @@ class AuthStore {
         
         do {
             let result = try await auth.signIn(withEmail: emailID, password: password)
-            signInResponse = AuthResponse(isSuccessed: true, message: "SignIn Successed", currentUser: result.user)
+            signInResponse = AuthResponse(isSuccessed: true, message: "로그인 성공!", currentUser: result.user)
         } catch {
             let errorCode = AuthErrorCode.Code(rawValue: error._code)
             switch errorCode {
@@ -73,6 +73,8 @@ class AuthStore {
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.weakPassword.description)
             case .wrongPassword:
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.wrongPassword.description)
+            case .invalidEmail:
+                signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.invalidEmail.description)
             case .userNotFound:
                 signInResponse = AuthResponse(isSuccessed: false, message:  AuthError.userNotFound.description)
             default:

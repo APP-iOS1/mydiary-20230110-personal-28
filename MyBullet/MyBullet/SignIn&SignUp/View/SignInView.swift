@@ -18,6 +18,9 @@ struct SignInView: View {
     // MARK: View Properties
     @State private var createAccount: Bool = false
     @State private var resetPassword: Bool = false
+    @State private var showToast: Bool = false
+    @State private var toastMessage: String = ""
+    @State private var isLoading: Bool = false
     
     private var activeButton: Bool {
         emailID.isEmpty || password.isEmpty
@@ -71,8 +74,14 @@ struct SignInView: View {
                 .padding(.vertical, 7)
             
             Button {
+                isLoading = true
                 Task {
                     await signInVM.signIn(emailID: emailID, password: password)
+                    if !signInVM.authResponse.isSuccessed {
+                        toastMessage = signInVM.authResponse.message
+                        showToast.toggle()
+                    }
+                    isLoading = false
                 }
             } label: {
                 Text("로그인")
@@ -101,6 +110,9 @@ struct SignInView: View {
             }
         }
         .padding(30)
+        .overlay {
+            LoadingView(showLoading: $isLoading)
+        }
         // MARK: 회원가입 뷰 via Sheet
         .fullScreenCover(isPresented: $createAccount) {
             SignUpView()
@@ -108,6 +120,11 @@ struct SignInView: View {
         .fullScreenCover(isPresented: $resetPassword) {
             ResetPasswordView()
         }
+        .showToast(showToast: $showToast, content:
+            FabulaToast(showToast: $showToast,
+                        toastData: FabulaToast.ToastData(title: "에러!", message: toastMessage, backgroundColor: Color.red),
+                        position: .top)
+        )
     }
 }
 
