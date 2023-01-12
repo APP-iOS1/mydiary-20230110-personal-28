@@ -5,7 +5,6 @@
 //  Created by Roen White on 2023/01/11.
 //
 
-import Foundation
 import SwiftUI
 
 struct ToastView: View {
