@@ -69,7 +69,6 @@ struct HomeView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "plus")
                         Text("할일 추가")
-                            .hyemin(18, .bold)
                     }
                 }
                 .buttonStyle(.borderedProminent)

@@ -1,5 +1,5 @@
 //
-//  AllignExtension.swift
+//  View+.swift
 //  MyBullet
 //
 //  Created by Roen White on 2023/01/10.

@@ -27,7 +27,7 @@ struct SignUpView: View {
     @State private var isLoading: Bool = false
     
     private var validEmail: Bool {
-        !isValidEmail(emailID)
+        String().isValidEmail(emailID)
     }
     private var validDisplayName: Bool {
         2 <= displayName.count && displayName.count <= 8

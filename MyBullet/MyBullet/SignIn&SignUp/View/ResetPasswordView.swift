@@ -21,7 +21,7 @@ struct ResetPasswordView: View {
     @State private var isLoading: Bool = false
     
     private var validEmail: Bool {
-        !isValidEmail(emailID)
+        String().isValidEmail(emailID)
     }
     
     var body: some View {
