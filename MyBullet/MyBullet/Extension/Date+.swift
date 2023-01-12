@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: Date Extension
 extension Date {
+    // MARK: Date Extension
     func toString(_ format: String, isLocale: Bool = true) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format

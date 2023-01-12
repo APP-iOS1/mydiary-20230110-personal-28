@@ -10,7 +10,7 @@ import FirebaseCore
 
 @main
 struct MyBulletApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
     
     @StateObject var authManager = AuthManager()
     
