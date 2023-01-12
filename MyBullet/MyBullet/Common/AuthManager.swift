@@ -24,7 +24,6 @@ class AuthManager: ObservableObject {
     @MainActor
     func signUpAndSetNickname(emailID: String, password: String, nickname: String) async {
         var result: AuthResponse = await authStore.signUp(emailID: emailID, password: password)
-        result = await authStore.signIn(emailID: emailID, password: password)
         result.message = "회원가입이 완료되었습니다."
         
         await authStore.changeDisplayName(nickname: nickname)

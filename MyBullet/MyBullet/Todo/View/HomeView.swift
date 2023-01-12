@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     // MARK: View Properties
     @State private var currentDay: Date = .init()
+    @State private var myTasks: [MyTask] = sampleTasks
+    @State private var addNewTask: Bool = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -19,36 +21,68 @@ struct HomeView: View {
         .safeAreaInset(edge: .top, spacing: 0) {
             HeaderView()
         }
+        .fullScreenCover(isPresented: $addNewTask) {
+            AddNewView { task in
+                myTasks.append(task)
+            }
+        }
     }
     
     /// - Timeline View
     @ViewBuilder
     func TimelineView() -> some View {
-        VStack {
+        ScrollViewReader { proxy in
             let hours = Calendar.current.hours
-            ForEach(hours, id: \.self) { hour in
-                TimelineViewRow(hour)
+            let midHour = hours[hours.count / 2]
+            VStack {
+                ForEach(hours, id: \.self) { hour in
+                    TimelineViewRow(hour).id(hour)
+                }
+            }
+            .onAppear {
+                proxy.scrollTo(midHour)
             }
         }
     }
     
     /// - Timeline View Row
     @ViewBuilder
-    func TimelineViewRow(_ hour: Date) -> some View {
+    func TimelineViewRow(_ date: Date) -> some View {
         HStack(alignment: .top) {
-            Text(hour.toString("h a", isLocale: false))
+            Text(date.toString("h a", isLocale: false))
                 .hyemin(14, .regular)
                 .frame(width: 45, alignment: .center)
             
-            Rectangle()
-                .stroke(.gray.opacity(0.5), style: StrokeStyle(lineWidth: 0.5, lineCap: .butt, lineJoin: .bevel, dash: [5], dashPhase: 7))
-                .frame(height: 0.5)
-                .offset(y: 10)
+            /// - Filtering Tasks
+            let calendar = Calendar.current
+            let filteredTasks = myTasks.filter {
+                if let hour = calendar.dateComponents([.hour], from: date).hour,
+                   let taskHour = calendar.dateComponents([.hour], from: $0.dateAdded).hour,
+                   hour == taskHour && calendar.isDate($0.dateAdded, inSameDayAs: currentDay) {
+                    return true
+                }
+                return false
+            }
+            
+            if filteredTasks.isEmpty {
+                Rectangle()
+                    .stroke(.gray.opacity(0.5), style: StrokeStyle(lineWidth: 0.5, lineCap: .butt, lineJoin: .bevel, dash: [5], dashPhase: 7))
+                    .frame(height: 0.5)
+                    .offset(y: 10)
+            } else {
+                /// - Task View
+                VStack(spacing: 10) {
+                    ForEach(filteredTasks) { task in
+                        TaskRow(task)
+                    }
+                }
+            }
+            
         }
         .hAlign(.leading)
         .padding(.vertical, 15)
     }
-
+    
     /// - Header View
     @ViewBuilder
     func HeaderView() -> some View {
@@ -64,7 +98,7 @@ struct HomeView: View {
                 .hAlign(.leading)
                 
                 Button {
-                    
+                    addNewTask.toggle()
                 } label: {
                     HStack(spacing: 10) {
                         Image(systemName: "plus")
@@ -124,6 +158,32 @@ struct HomeView: View {
         .padding(.horizontal, -15)
     }
     
+    @ViewBuilder
+    func TaskRow(_ task: MyTask) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(task.taskName)
+                .hyemin(16, .bold)
+                .foregroundColor(task.taskCategory.color)
+            
+            if task.taskDescription != "" {
+                Text(task.taskDescription)
+                    .hyemin(14, .regular)
+                    .foregroundColor(task.taskCategory.color.opacity(0.8))
+            }
+        }
+        .hAlign(.leading)
+        .padding(12)
+        .background {
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .fill(task.taskCategory.color)
+                    .frame(width: 4)
+                
+                Rectangle()
+                    .fill(task.taskCategory.color.opacity(0.25))
+            }
+        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
