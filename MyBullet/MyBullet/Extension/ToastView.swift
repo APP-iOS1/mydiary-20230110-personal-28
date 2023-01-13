@@ -107,4 +107,3 @@ extension View {
         self.modifier(ToastModifier(showToast: showToast, content: content))
     }
 }
-
