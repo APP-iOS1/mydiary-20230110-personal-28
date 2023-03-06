@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ATSApplicationFontsPath</key>
+	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -12,6 +14,11 @@
 				<string>com.googleusercontent.apps.875571392207-loh3tqaa592sl304skrq9gtljqlnk926</string>
 			</array>
 		</dict>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>IM_Hyemin-Regular.ttf</string>
+		<string>IM_Hyemin-Bold.ttf</string>
 	</array>
 </dict>
 </plist>
